@@ -91,12 +91,12 @@ document.querySelectorAll('.btn').forEach(btn => {
 // Hero slideshow with logo fade
 let currentSlide = 0;
 const heroImages = [
-    'images/IMG_9053.JPG',
-    'images/IMG_9071.JPG',
-    'images/IMG_9183.JPG',
-    'images/IMG_9234.JPG',
-    'images/IMG_E9022.JPG',
-    'images/GridArt_20250323_174730792.jpg'
+    'IMG_9053.JPG',
+    'IMG_9071.JPG',
+    'IMG_9183.JPG',
+    'IMG_9234.JPG',
+    'IMG_E9022.JPG',
+    'GridArt_20250323_174730792.jpg'
 ];
 
 function nextSlide() {
