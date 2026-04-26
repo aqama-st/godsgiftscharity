@@ -528,8 +528,8 @@ body {
 }
 
 .donation-hero-subtitle.handwritten {
-    font-family: 'Dancing Script', cursive !important;
-    font-weight: 600;
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700;
     font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
     letter-spacing: 1px;
 }
@@ -604,138 +604,137 @@ body {
     margin-bottom: 2rem;
 }
 
+.support-card .btn-secondary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(59,130,246,0.4);
+}
+
+.support-card .btn-secondary:hover {
+    background: #45a049;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
 .donation-form-section {
     padding: 6rem 0;
-    background: #fff;
+    background: #f8f9fa;
 }
 
 .form-hero {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .form-subtitle {
-    font-size: 1.3rem;
-    color: #666;
-    max-width: 600px;
-    margin: 1rem auto 0;
-    font-weight: 400;
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
 }
 
 .donation-form-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: var(--shadow-soft);
     max-width: 700px;
     margin: 0 auto;
-    background: white;
-    padding: 4rem;
-    border-radius: 30px;
-    box-shadow: 0 30px 100px rgba(0,0,0,0.1);
-    border: 1px solid rgba(76,175,80,0.1);
+}
+
+.amount-section {
+    margin-bottom: 2rem;
 }
 
 .bold-label {
     display: block;
-    font-size: 1.3rem;
     font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
     color: #1a1a1a;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .amount-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2rem;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
 }
 
 .amount-btn {
-    flex: 1;
-    min-width: 80px;
-    padding: 1.2rem 1rem;
+    flex: 1 1 calc(33.333% - 0.75rem);
+    padding: 1rem;
     border: 2px solid #e0e0e0;
+    border-radius: 12px;
     background: white;
-    border-radius: 15px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #333;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    text-align: center;
 }
 
 .amount-btn:hover {
     border-color: var(--primary-green);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(76,175,80,0.2);
+    color: var(--primary-green);
 }
 
 .amount-btn.active {
-    background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
-    color: white;
+    background: var(--primary-green);
     border-color: var(--primary-green);
-    box-shadow: 0 10px 30px rgba(76,175,80,0.4);
+    color: white;
+    box-shadow: 0 4px 15px rgba(76,175,80,0.3);
 }
 
 .custom-amount {
-    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 .custom-amount input {
     width: 100%;
-    padding: 1.5rem;
+    padding: 1rem;
     border: 2px solid #e0e0e0;
-    border-radius: 15px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
 }
 
 .custom-amount input:focus {
     outline: none;
     border-color: var(--primary-green);
-    box-shadow: 0 0 0 4px rgba(76,175,80,0.1);
 }
 
-#frequency {
+.frequency-section {
+    margin-bottom: 2rem;
+}
+
+.frequency-section select {
     width: 100%;
-    padding: 1.5rem;
+    padding: 1rem;
     border: 2px solid #e0e0e0;
-    border-radius: 15px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    background: #f8f9fa;
-    transition: all 0.3s ease;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-    background-position: right 1rem center;
-    background-repeat: no-repeat;
-    background-size: 1.5em;
-    padding-right: 3.5rem;
-}
-
-#frequency:focus {
-    border-color: var(--primary-green);
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(76,175,80,0.1);
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-family: 'Poppins', sans-serif;
+    background: white;
+    cursor: pointer;
 }
 
 .fees-toggle {
-    margin: 2rem 0 3rem;
-    padding: 1.5rem;
-    background: #f8f9fa;
-    border-radius: 15px;
-    border-left: 5px solid var(--primary-green);
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f0f8f0;
+    border-radius: 12px;
 }
 
 .toggle-label {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    font-size: 1.1rem;
-    font-weight: 500;
+    gap: 0.75rem;
+    font-size: 1rem;
+    color: #333;
     cursor: pointer;
 }
 
@@ -743,62 +742,226 @@ body {
     width: 20px;
     height: 20px;
     accent-color: var(--primary-green);
+    cursor: pointer;
 }
 
 .donate-buttons {
     text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .donate-btn {
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(59,130,246,0.4);
-}
-
-.donate-btn::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255,255,255,0.3);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.donate-btn:hover::after {
-    width: 300px;
-    height: 300px;
-}
-
-.donate-btn span {
-    position: relative;
-    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
 }
 
 .donate-btn small {
-    display: block;
-    opacity: 0.8;
     font-size: 0.85rem;
+    opacity: 0.8;
     font-weight: 400;
-    margin-top: 0.25rem;
 }
 
 .security-note {
     text-align: center;
-    margin-top: 2rem;
+    color: #777;
     font-size: 0.95rem;
-    color: #666;
+    margin-top: 1rem;
+}
+
+/* Thank You Message */
+.thank-you-message {
+    padding: 4rem 0;
+}
+
+.thank-you-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: var(--shadow-soft);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.thank-you-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.thank-you-card h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.thank-you-card p {
+    color: #555;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.thank-you-footer {
     font-style: italic;
+    color: #777;
+    margin-bottom: 2rem;
 }
 
+/* Donation Impact */
 .donation-impact {
-    padding: 5rem 0;
-    background: linear-gradient(135deg, #f8f9fa, #e8f5e8);
+    padding: 6rem 0;
+    background: white;
 }
 
+.donation-impact .impact-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+
+/* Contact Modal */
+.contact-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+}
+
+.contact-modal-content {
+    position: relative;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    z-index: 1001;
+    box-shadow: var(--shadow-hover);
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+}
+
+.contact-modal-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.contact-modal-content h2 {
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+}
+
+.contact-modal-details {
+    margin: 1.5rem 0;
+    text-align: left;
+}
+
+.contact-modal-details p {
+    margin-bottom: 0.75rem;
+    color: #444;
+}
+
+.contact-modal-socials {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+/* Footer */
+.footer {
+    background: #1a1a1a;
+    color: #ccc;
+    padding: 4rem 0 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: var(--primary-green);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Fade-in animation for scroll */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
 /* Programs Page Styles */
 .programs-hero {
     background: linear-gradient(135deg, var(--primary-green), var(--secondary-blue));
