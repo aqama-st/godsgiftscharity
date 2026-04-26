@@ -72,12 +72,12 @@
                     <div class="amount-section">
                         <label class="bold-label">Choose Amount (USD)</label>
                         <div class="amount-buttons">
-                            <button type="button" class="amount-btn" data-amount="10">$10</button>
-                            <button type="button" class="amount-btn" data-amount="25">$25</button>
-                            <button type="button" class="amount-btn" data-amount="50">$50</button>
-                            <button type="button" class="amount-btn active" data-amount="100">$100</button>
-                            <button type="button" class="amount-btn" data-amount="500">$500</button>
-                            <button type="button" class="amount-btn" data-amount="1000">$1,000</button>
+                            <button type="button" class="amount-btn" data-amount="10" onclick="selectAmount('10.00', this)">$10</button>
+                            <button type="button" class="amount-btn" data-amount="25" onclick="selectAmount('25.00', this)">$25</button>
+                            <button type="button" class="amount-btn" data-amount="50" onclick="selectAmount('50.00', this)">$50</button>
+                            <button type="button" class="amount-btn active" data-amount="100" onclick="selectAmount('100.00', this)">$100</button>
+                            <button type="button" class="amount-btn" data-amount="500" onclick="selectAmount('500.00', this)">$500</button>
+                            <button type="button" class="amount-btn" data-amount="1000" onclick="selectAmount('1000.00', this)">$1,000</button>
                         </div>
                         <div class="custom-amount">
                             <input type="number" id="custom-amount" placeholder="Or enter custom amount" min="1">
@@ -99,10 +99,8 @@
                         </label>
                     </div>
                     <div class="donate-buttons">
-                        <button class="btn btn-primary btn-large donate-btn" onclick="handleDonationSubmit()">
-                            <span>Proceed to Secure Payment</span>
-                            <small>Powered by Stripe/PayPal</small>
-                        </button>
+                        <div id="paypal-button-container"></div>
+                        <p class="paypal-note">Select a donation amount above to proceed securely via PayPal</p>
                     </div>
                     <div class="security-note">
                         <span>🔒 Secure 256-bit SSL | Tax-deductible | 100% transparent</span>
@@ -231,6 +229,94 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        let selectedAmount = '100.00';
+        const paypalContainer = document.getElementById('paypal-button-container');
+        const customInput = document.getElementById('custom-amount');
+        const amountButtons = document.querySelectorAll('.amount-btn');
+
+        function selectAmount(amount, btn) {
+            selectedAmount = amount;
+            amountButtons.forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            if (customInput) customInput.value = '';
+            if (paypalContainer) paypalContainer.classList.add('active');
+        }
+
+        if (customInput) {
+            customInput.addEventListener('input', function() {
+                const val = parseFloat(this.value);
+                if (val > 0) {
+                    selectedAmount = val.toFixed(2);
+                    amountButtons.forEach(b => b.classList.remove('active'));
+                    if (paypalContainer) paypalContainer.classList.add('active');
+                } else {
+                    selectedAmount = '0.00';
+                    if (paypalContainer) paypalContainer.classList.remove('active');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const defaultBtn = document.querySelector('.amount-btn.active');
+            if (defaultBtn) {
+                selectAmount(parseFloat(defaultBtn.dataset.amount).toFixed(2), defaultBtn);
+            }
+        });
+
+        if (typeof paypal !== 'undefined') {
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: selectedAmount,
+                                currency_code: 'USD'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        const formCard = document.querySelector('.donation-form-card');
+                        const thankYouMessage = document.getElementById('thank-you-message');
+                        const thankYouDetails = document.getElementById('thank-you-details');
+                        const frequencySelect = document.getElementById('frequency');
+                        const frequency = frequencySelect ? frequencySelect.value : 'one-time';
+                        const donorName = (details.payer && details.payer.name && details.payer.name.given_name) ? details.payer.name.given_name : 'Guest';
+
+                        if (formCard) formCard.style.display = 'none';
+                        if (thankYouDetails) {
+                            thankYouDetails.innerHTML = `
+                                <strong>Amount:</strong> $${selectedAmount} USD<br>
+                                <strong>Frequency:</strong> ${frequency}<br>
+                                <strong>Donor:</strong> ${donorName}
+                            `;
+                        }
+                        if (thankYouMessage) {
+                            thankYouMessage.style.display = 'block';
+                            thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+
+                        alert('Donation of $' + selectedAmount + ' completed by ' + donorName);
+                    });
+                },
+                onError: function(err) {
+                    console.error('PayPal Error:', err);
+                    alert('An error occurred during the payment process. Please try again.');
+                }
+            }).render('#paypal-button-container');
+        } else {
+            console.error('PayPal SDK not loaded');
+        }
+    </script>
 </body>
 </html>
+
 
