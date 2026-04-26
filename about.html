@@ -6,55 +6,16 @@
     <title>About Us - GODS GIFT CHARITY INITIATIVE</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&family='Times+New+Roman'" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .hero-nav-top {
-            padding: 20px 30px;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 10;
-        }
-        .hero-logo-container {
-            text-align: center;
-            padding: 40px 20px;
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #1a1a1a;
-        }
-        .hero-logo-large {
-            max-width: 400px;
-            height: auto;
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-        }
-        @media (max-width: 768px) {
-            .hero-nav-top {
-                flex-direction: column;
-                gap: 10px;
-                padding: 15px;
-            }
-            .hero-nav-top .hero-nav {
-                order: 2;
-            }
-            .hero-logo-large {
-                max-width: 300px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <!-- Hero Section with logo and nav like index.html -->
-    <div class="hero-nav-top">
+    <!-- Navigation with Logo -->
+    <div class="about-nav-top">
+        <a href="index.html">
+            <img src="images/logo.jpeg" alt="God's Gift Charity Logo" class="about-logo">
+        </a>
         <nav class="hero-nav">
             <a href="index.html" class="nav-btn">Home</a>
             <a href="programs.html" class="nav-btn">Programs</a>
@@ -62,79 +23,91 @@
             <a href="donate.html" class="nav-btn">Donate</a>
         </nav>
     </div>
-    <div class="hero-logo-container">
-        <img src="logo.jpeg" alt="God's Gift Charity Logo" class="hero-logo-large">
-    </div>
 
-    <!-- About Content -->
-    <section class="about-hero">
-        <div class="container">
-            <!-- Who We Are section -->
-            <section class="content-section">
+    <main>
+        <!-- About Hero -->
+        <section class="about-hero">
+            <div class="container">
+                <img src="images/logo.jpeg" alt="God's Gift Charity Logo" class="about-hero-logo">
+            </div>
+        </section>
+
+        <!-- Who We Are -->
+        <section class="about-intro">
+            <div class="container">
                 <h2 class="section-title">Who We Are</h2>
-                <p>Gods gifts charity initiative is a community-based Christ centered organization located in Luweero district central Uganda. Inspired by the suffering caused by the long term effects of the war in this region we were founded to serve the most vulnerable members of the community –the orphans, the widows, the elderly, the women and the forgotten. We believe that every person is a precious gift from God, created with dignity and purpose. Our work is to restore this dignity with love care and compassion.</p>
-            </section>
+                <p class="about-intro-text">
+                    <span class="highlight">God's Gift Charity Initiative</span> is a community-based, Christ-centered organization located in Luweero district, central Uganda. Inspired by the suffering caused by the long-term effects of war in this region, we were founded to serve the most vulnerable members of the community — the orphans, the widows, the elderly, the women, and the forgotten. We believe that every person is a precious gift from God, created with dignity and purpose. Our work is to restore this dignity with love, care, and compassion.
+                </p>
+            </div>
+        </section>
 
-            <!-- Mission and Vision subsections -->
-            <div class="mission-vision-grid">
-                <div class="mission-vision-card">
-                    <h3>Our Mission</h3>
-                    <p>To demonstrate love by empowering the poor and the needy through education, human rights advocacy, climate action and community development.</p>
-                </div>
-                <div class="mission-vision-card">
-                    <h3>Our Vision</h3>
-                    <p>A transformed community in Luweero where poverty is broken, rights are respected, community is empowered and every individual walks in the fullness of God's purpose and love.</p>
+        <!-- Mission and Vision -->
+        <section class="programs-section">
+            <div class="container">
+                <h2 class="section-title">Our Mission &amp; Vision</h2>
+                <div class="mission-vision-grid">
+                    <div class="mission-vision-card">
+                        <h3>Our Mission</h3>
+                        <p>To demonstrate love by empowering the poor and the needy through education, human rights advocacy, climate action, and community development.</p>
+                    </div>
+                    <div class="mission-vision-card">
+                        <h3>Our Vision</h3>
+                        <p>A transformed community in Luweero where poverty is broken, rights are respected, communities are empowered, and every individual walks in the fullness of God's purpose and love.</p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Team section -->
-            <section class="team-section">
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
                 <h2 class="section-title">Our Team</h2>
                 <div class="team-grid">
                     <div class="team-card">
-                        <img class="team-photo" src="WT.jpeg" alt="Wamala Tonny">
+                        <img class="team-photo" src="images/WT.jpeg" alt="Wamala Tonny">
                         <div class="team-name">Wamala Tonny</div>
                         <div class="team-role">CEO / Programs Manager</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="MR.jpeg" alt="Mutebi Ronald">
+                        <img class="team-photo" src="images/MR.jpeg" alt="Mutebi Ronald">
                         <div class="team-name">Mutebi Ronald</div>
                         <div class="team-role">Projects Manager</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="HS.jpeg" alt="Herbert Sekabira">
+                        <img class="team-photo" src="images/HS.jpeg" alt="Herbert Sekabira">
                         <div class="team-name">Herbert Sekabira</div>
                         <div class="team-role">Grants Manager</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="NM.jpeg" alt="Namuli Margret">
+                        <img class="team-photo" src="images/NM.jpeg" alt="Namuli Margret">
                         <div class="team-name">Namuli Margret</div>
                         <div class="team-role">Head Church Ministry</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="KC.JPG" alt="Kavuma Emmanuel Calvin">
+                        <img class="team-photo" src="images/KC.JPG" alt="Kavuma Emmanuel Calvin">
                         <div class="team-name">Kavuma Emmanuel Calvin</div>
-                        <div class="team-role">DATA AND FINANCE ENGINEER</div>
+                        <div class="team-role">Data &amp; Finance Engineer</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="MF.jpeg" alt="Murungi Finbar">
+                        <img class="team-photo" src="images/MF.jpeg" alt="Murungi Finbar">
                         <div class="team-name">Murungi Finbar</div>
-                        <div class="team-role">ACCOUNTANT</div>
+                        <div class="team-role">Accountant</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="NS.jpeg" alt="Nakalyango Sharifah">
+                        <img class="team-photo" src="images/NS.jpeg" alt="Nakalyango Sharifah">
                         <div class="team-name">Nakalyango Sharifah</div>
                         <div class="team-role">Secretary</div>
                     </div>
                     <div class="team-card">
-                        <img class="team-photo" src="NK.jpeg" alt="Newton Kagwa">
+                        <img class="team-photo" src="images/NK.jpeg" alt="Newton Kagwa">
                         <div class="team-name">Newton Kagwa</div>
                         <div class="team-role">Volunteer Coordinator</div>
                     </div>
                 </div>
-            </section>
-        </div>
-    </section>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

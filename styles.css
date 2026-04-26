@@ -1469,4 +1469,193 @@ html {
     scroll-behavior: smooth;
 }
 
+/* ============================================
+   REUSABLE SOCIAL ICONS COMPONENT
+   ============================================ */
+
+/* Container */
+.social-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Individual Icon Link */
+.social-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #333;
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    outline: none;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    transform: scale(1.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.social-icon:focus-visible {
+    outline: 2px solid var(--secondary-blue);
+    outline-offset: 2px;
+}
+
+/* Platform-specific hover colors */
+.social-icon--facebook:hover,
+.social-icon--facebook:focus {
+    background: #1877F2;
+    color: white;
+    border-color: #1877F2;
+}
+
+.social-icon--instagram:hover,
+.social-icon--instagram:focus {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    border-color: #E4405F;
+}
+
+.social-icon--x:hover,
+.social-icon--x:focus {
+    background: #000000;
+    color: white;
+    border-color: #000000;
+}
+
+.social-icon--whatsapp:hover,
+.social-icon--whatsapp:focus {
+    background: #25D366;
+    color: white;
+    border-color: #25D366;
+}
+
+/* WhatsApp Primary CTA */
+.social-icon--whatsapp {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+    background: rgba(37, 211, 102, 0.1);
+    color: #25D366;
+    border-color: rgba(37, 211, 102, 0.3);
+    animation: whatsapp-pulse 2s infinite;
+}
+
+@keyframes whatsapp-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(37, 211, 102, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+    }
+}
+
+.social-icon--whatsapp:hover,
+.social-icon--whatsapp:focus {
+    animation: none;
+    background: #25D366;
+    color: white;
+}
+
+/* Tooltip */
+.social-icon::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #1a1a1a;
+    color: white;
+    padding: 0.4rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.social-icon::after {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1a1a1a transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.social-icon:hover::before,
+.social-icon:hover::after,
+.social-icon:focus::before,
+.social-icon:focus::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Dark variant for footer / dark backgrounds */
+.social-icons--dark .social-icon {
+    background: rgba(255, 255, 255, 0.08);
+    color: #ccc;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.social-icons--dark .social-icon:hover,
+.social-icons--dark .social-icon:focus {
+    color: white;
+}
+
+.social-icons--dark .social-icon--whatsapp {
+    background: rgba(37, 211, 102, 0.15);
+    color: #25D366;
+    border-color: rgba(37, 211, 102, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .social-icons {
+        gap: 0.6rem;
+    }
+
+    .social-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+
+    .social-icon--whatsapp {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+}
+
+
 
