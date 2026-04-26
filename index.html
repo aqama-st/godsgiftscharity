@@ -161,15 +161,30 @@
         <div class="container">
             <h2 class="section-title">Our Partners</h2>
             <div class="partners-grid">
-                <div class="partner-logo">Partner Logo</div>
-                <div class="partner-logo">Partner Logo</div>
-                <div class="partner-logo">Partner Logo</div>
-                <div class="partner-logo">Partner Logo</div>
-                <div class="partner-logo">Partner Logo</div>
-                <div class="partner-logo">Partner Logo</div>
+                <button class="become-partner-btn" onclick="openPartnerModal()">Become a Partner</button>
+                <button class="become-partner-btn" onclick="openPartnerModal()">Become a Partner</button>
+                <button class="become-partner-btn" onclick="openPartnerModal()">Become a Partner</button>
             </div>
         </div>
     </section>
+
+    <!-- Partnership Modal -->
+    <div id="partner-modal" class="contact-modal" style="display: none;">
+        <div class="contact-modal-overlay" onclick="closePartnerModal()"></div>
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" onclick="closePartnerModal()">&times;</button>
+            <div class="contact-modal-icon">🤝</div>
+            <h2>Partner With Us</h2>
+            <p>We would love to explore a partnership with you. Reach out to us using the contact information below.</p>
+            <div class="contact-modal-details">
+                <p><strong>Phone / WhatsApp:</strong> 0744277594</p>
+                <p><strong>Email:</strong> godsgiftcharity@gmail.com</p>
+            </div>
+            <div class="contact-modal-socials">
+                <p>Follow us on social media for updates!</p>
+            </div>
+        </div>
+    </div>
 
     <section id="donate" class="cta">
         <div class="container">

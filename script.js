@@ -222,81 +222,28 @@ function closeContactModal() {
     }
 }
 
-
-// ESC close
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeContactModal();
-});
-
-// Donation form handler
-function handleDonationSubmit() {
-    const activeBtn = document.querySelector('.amount-btn.active');
-    const customAmountInput = document.getElementById('custom-amount');
-    const frequencySelect = document.getElementById('frequency');
-    const coverFeesCheckbox = document.getElementById('cover-fees');
-
-    let amount = '';
-    if (activeBtn) {
-        amount = activeBtn.getAttribute('data-amount');
-    }
-    
-    const customAmount = customAmountInput ? customAmountInput.value : '';
-    
-    if (customAmount && customAmount > 0) {
-        amount = customAmount;
-    }
-    
-    if (!amount || amount <= 0) {
-        alert('Please select a preset amount or enter a custom amount.');
-        return;
-    }
-    
-    const frequency = frequencySelect ? frequencySelect.value : 'one-time';
-    const coverFees = coverFeesCheckbox ? coverFeesCheckbox.checked : false;
-    
-    // Hide form and show thank you message
-    const formCard = document.querySelector('.donation-form-card');
-    const thankYouMessage = document.getElementById('thank-you-message');
-    const thankYouDetails = document.getElementById('thank-you-details');
-    
-    if (formCard) formCard.style.display = 'none';
-    
-    if (thankYouDetails) {
-        thankYouDetails.innerHTML = `
-            <strong>Amount:</strong> $${parseFloat(amount).toLocaleString()} USD<br>
-            <strong>Frequency:</strong> ${frequency.charAt(0).toUpperCase() + frequency.slice(1)}<br>
-            <strong>Cover transaction fees:</strong> ${coverFees ? 'Yes' : 'No'}
-        `;
-    }
-    
-    if (thankYouMessage) {
-        thankYouMessage.style.display = 'block';
-        thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-    
-    console.log('Donation data:', { amount, frequency, coverFees });
-}
-
-// Contact modal functions
-function openContactModal() {
-    const modal = document.getElementById('contact-modal');
+// Partnership Modal
+function openPartnerModal() {
+    const modal = document.getElementById('partner-modal');
     if (modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
 }
 
-function closeContactModal() {
-    const modal = document.getElementById('contact-modal');
+function closePartnerModal() {
+    const modal = document.getElementById('partner-modal');
     if (modal) {
         modal.style.display = 'none';
         document.body.style.overflow = '';
     }
 }
 
-// Close modal on Escape key
+
+// ESC close
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeContactModal();
+        closePartnerModal();
     }
 });
