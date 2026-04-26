@@ -1,5 +1,5 @@
 // Smooth scrolling for anchor links
-document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const href = this.getAttribute('href');
@@ -78,6 +78,7 @@ if ('IntersectionObserver' in window === false) {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    initAmountButtons();
     initFadeIns();
     animateCounters();
 });
@@ -91,12 +92,12 @@ document.querySelectorAll('.btn').forEach(btn => {
 // Hero slideshow with logo fade
 let currentSlide = 0;
 const heroImages = [
-    'IMG_9053.JPG',
-    'IMG_9071.JPG',
-    'IMG_9183.JPG',
-    'IMG_9234.JPG',
-    'IMG_E9022.JPG',
-    'GridArt_20250323_174730792.jpg'
+    'images/IMG_9053.JPG',
+    'images/IMG_9071.JPG',
+    'images/IMG_9183.JPG',
+    'images/IMG_9234.JPG',
+    'images/IMG_E9022.JPG',
+    'images/GridArt_20250323_174730792.jpg'
 ];
 
 function nextSlide() {
@@ -130,33 +131,86 @@ if (document.getElementById('hero') && window.location.pathname.includes('index.
     startSliderWithLogoFade();
 }
 
-// Donation form handler (demo)
+// Amount button selection logic
+function initAmountButtons() {
+    const amountButtons = document.querySelectorAll('.amount-btn');
+    amountButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            amountButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+}
+
+// Donation form handler
 function handleDonationSubmit() {
-    const amountRadios = document.querySelectorAll('input[name="amount"]:checked');
-    const customAmount = document.querySelector('input[name="custom-amount"]').value;
-    const frequency = document.querySelector('input[name="frequency"]:checked')?.value || 'one-time';
-    const transactionCharge = document.querySelector('input[name="transaction-charge"]:checked')?.value || 'no';
-    
+    const activeBtn = document.querySelector('.amount-btn.active');
+    const customAmountInput = document.getElementById('custom-amount');
+    const frequencySelect = document.getElementById('frequency');
+    const coverFeesCheckbox = document.getElementById('cover-fees');
+
     let amount = '';
-    if (amountRadios.length > 0) {
-        amount = amountRadios[0].value;
-    } else if (customAmount && customAmount > 0) {
+    if (activeBtn) {
+        amount = activeBtn.getAttribute('data-amount');
+    }
+    
+    const customAmount = customAmountInput ? customAmountInput.value : '';
+    
+    if (customAmount && customAmount > 0) {
         amount = customAmount;
-    } else {
+    }
+    
+    if (!amount || amount <= 0) {
         alert('Please select a preset amount or enter a custom amount.');
         return;
     }
     
-    const message = `Thank you for your donation!\n\nSummary:
-Amount: $${amount} USD
-Frequency: ${frequency}
-Cover transaction charges: ${transactionCharge === 'yes' ? 'Yes' : 'No'}
-
-Demo: In production, this would redirect to PayPal, Flutterwave, or Stripe checkout with these parameters.`;
+    const frequency = frequencySelect ? frequencySelect.value : 'one-time';
+    const coverFees = coverFeesCheckbox ? coverFeesCheckbox.checked : false;
     
-    alert(message);
+    // Hide form and show thank you message
+    const formCard = document.querySelector('.donation-form-card');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const thankYouDetails = document.getElementById('thank-you-details');
     
-    // Simulate payment redirect
-    console.log('Donation data:', { amount, frequency, transactionCharge });
+    if (formCard) formCard.style.display = 'none';
+    
+    if (thankYouDetails) {
+        thankYouDetails.innerHTML = `
+            <strong>Amount:</strong> $${parseFloat(amount).toLocaleString()} USD<br>
+            <strong>Frequency:</strong> ${frequency.charAt(0).toUpperCase() + frequency.slice(1)}<br>
+            <strong>Cover transaction fees:</strong> ${coverFees ? 'Yes' : 'No'}
+        `;
+    }
+    
+    if (thankYouMessage) {
+        thankYouMessage.style.display = 'block';
+        thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
+    console.log('Donation data:', { amount, frequency, coverFees });
 }
 
+// Contact modal functions
+function openContactModal() {
+    const modal = document.getElementById('contact-modal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contact-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeContactModal();
+    }
+});
