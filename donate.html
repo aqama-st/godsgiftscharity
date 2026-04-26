@@ -256,8 +256,10 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        let selectedAmount = '100.00';
+   <script>
+    let selectedAmount = '100.00';
+
+    document.addEventListener('DOMContentLoaded', function () {
         const paypalContainer = document.getElementById('paypal-button-container');
         const customInput = document.getElementById('custom-amount');
         const amountButtons = document.querySelectorAll('.amount-btn');
@@ -270,28 +272,35 @@
             if (paypalContainer) paypalContainer.classList.add('active');
         }
 
+        // Attach to global so buttons still work
+        window.selectAmount = selectAmount;
+
         if (customInput) {
-            customInput.addEventListener('input', function() {
+            customInput.addEventListener('input', function () {
                 const val = parseFloat(this.value);
                 if (val > 0) {
                     selectedAmount = val.toFixed(2);
                     amountButtons.forEach(b => b.classList.remove('active'));
-                    if (paypalContainer) paypalContainer.classList.add('active');
+                    paypalContainer.classList.add('active');
                 } else {
-                    selectedAmount = '0.00';
-                    if (paypalContainer) paypalContainer.classList.remove('active');
+                    paypalContainer.classList.remove('active');
                 }
             });
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const defaultBtn = document.querySelector('.amount-btn.active');
-            if (defaultBtn) {
-                selectAmount(parseFloat(defaultBtn.dataset.amount).toFixed(2), defaultBtn);
-            }
-        });
+        // Set default amount
+        const defaultBtn = document.querySelector('.amount-btn.active');
+        if (defaultBtn) {
+            selectAmount(parseFloat(defaultBtn.dataset.amount).toFixed(2), defaultBtn);
+        }
 
-        if (typeof paypal !== 'undefined') {
+        // 🔥 WAIT until EVERYTHING (including PayPal) is loaded
+        window.addEventListener('load', function () {
+            if (!window.paypal) {
+                console.error('PayPal SDK failed to load.');
+                return;
+            }
+
             paypal.Buttons({
                 style: {
                     layout: 'vertical',
@@ -299,7 +308,8 @@
                     shape: 'rect',
                     label: 'paypal'
                 },
-                createOrder: function(data, actions) {
+
+                createOrder: function (data, actions) {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
@@ -309,16 +319,17 @@
                         }]
                     });
                 },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
+
+                onApprove: function (data, actions) {
+                    return actions.order.capture().then(function (details) {
                         const formCard = document.querySelector('.donation-form-card');
                         const thankYouMessage = document.getElementById('thank-you-message');
                         const thankYouDetails = document.getElementById('thank-you-details');
-                        const frequencySelect = document.getElementById('frequency');
-                        const frequency = frequencySelect ? frequencySelect.value : 'one-time';
-                        const donorName = (details.payer && details.payer.name && details.payer.name.given_name) ? details.payer.name.given_name : 'Guest';
+                        const frequency = document.getElementById('frequency').value;
+                        const donorName = details?.payer?.name?.given_name || 'Guest';
 
                         if (formCard) formCard.style.display = 'none';
+
                         if (thankYouDetails) {
                             thankYouDetails.innerHTML = `
                                 <strong>Amount:</strong> $${selectedAmount} USD<br>
@@ -326,23 +337,25 @@
                                 <strong>Donor:</strong> ${donorName}
                             `;
                         }
+
                         if (thankYouMessage) {
                             thankYouMessage.style.display = 'block';
-                            thankYouMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            thankYouMessage.scrollIntoView({ behavior: 'smooth' });
                         }
 
-                        alert('Donation of $' + selectedAmount + ' completed by ' + donorName);
+                        alert(`Donation of $${selectedAmount} completed by ${donorName}`);
                     });
                 },
-                onError: function(err) {
+
+                onError: function (err) {
                     console.error('PayPal Error:', err);
-                    alert('An error occurred during the payment process. Please try again.');
+                    alert('Payment failed. Please try again.');
                 }
+
             }).render('#paypal-button-container');
-        } else {
-            console.error('PayPal SDK not loaded');
-        }
-    </script>
+        });
+    });
+</script>
 </body>
 </html>
 
