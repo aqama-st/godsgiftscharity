@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GODS GIFTS CHARITY INITIATIVE - extending love and restoring hope</title>
+    <title>GODS GIFT CHARITY INITIATIVE - extending love and restoring hope</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@600;700&family='Times+New+Roman'" rel="stylesheet">
@@ -55,21 +55,57 @@
     <section class="hero" id="hero">
         <div class="hero-nav-top">
             <nav class="hero-nav">
-<a href="about.html" class="nav-btn">About Us</a>
+                <a href="about.html" class="nav-btn">About Us</a>
                 <a href="programs.html" class="nav-btn">Programs</a>
                 <a href="stories.html" class="nav-btn">Stories</a>
             </nav>
         </div>
         <div class="hero-logo-container">
-            <img src="logo.jpeg" alt="God's Gift Charity Logo" class="hero-logo-large">
+            <img src="images/logo.jpeg" alt="God's Gift Charity Logo" class="hero-logo-large">
         </div>
-        <div class="hero-content">
-            <p class="hero-subtitle">extending love and restoring hope</p>
-            <div class="hero-buttons">
-                <a href="donate.html" class="btn btn-primary btn-large">Donate</a>
+
+        <!-- Hero Image Slider (ind 02 - ind 10) -->
+        <div class="hero-slider" aria-label="Charity highlights" data-hero-slider>
+            <div class="hero-slider-track" id="hero-slider-track">
+                <div class="hero-slide is-active"><img src="ind 02 (1).jpeg" alt="Charity highlight 1"></div>
+                <div class="hero-slide"><img src="ind 02 (2).jpeg" alt="Charity highlight 2"></div>
+                <div class="hero-slide"><img src="ind 03.jpeg" alt="Charity highlight 3"></div>
+                <div class="hero-slide"><img src="ind 4.jpeg" alt="Charity highlight 4"></div>
+                <div class="hero-slide"><img src="ind 5.jpeg" alt="Charity highlight 5"></div>
+                <div class="hero-slide"><img src="ind 6.jpeg" alt="Charity highlight 6"></div>
+                <div class="hero-slide"><img src="ind 7.jpeg" alt="Charity highlight 7"></div>
+                <div class="hero-slide"><img src="ind 8.jpeg" alt="Charity highlight 8"></div>
+                <div class="hero-slide"><img src="ind 9.jpeg" alt="Charity highlight 9"></div>
+                <div class="hero-slide"><img src="ind 10.jpeg" alt="Charity highlight 10"></div>
+            </div>
+
+            <!-- Cinematic controls -->
+            <button class="hero-slider-arrow hero-slider-arrow--prev" type="button" data-hero-prev aria-label="Previous slide">
+                <span aria-hidden="true">‹</span>
+            </button>
+            <button class="hero-slider-arrow hero-slider-arrow--next" type="button" data-hero-next aria-label="Next slide">
+                <span aria-hidden="true">›</span>
+            </button>
+
+            <div class="hero-slider-dots" role="tablist" aria-label="Slide navigation" data-hero-dots>
+                <!-- dots injected by script.js -->
+            </div>
+        </div>
+
+        <div class="hero-content" role="region" aria-label="Hero message">
+            <div class="hero-content-inner">
+                <p class="hero-subtitle" aria-label="Extending love and restoring hope">extending love and restoring hope</p>
+                <div class="hero-buttons">
+                    <a href="donate.html" class="btn btn-primary btn-large">Donate</a>
+                </div>
+
+                <div class="hero-scroll-indicator" aria-hidden="true">
+                    <span class="hero-scroll-indicator__dot"></span>
+                </div>
             </div>
         </div>
     </section>
+
 
     <!-- Rest of page unchanged -->
     <section id="programs" class="programs">

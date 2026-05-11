@@ -41,10 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Start slider if hero exists
-    if (document.getElementById('hero') && window.location.pathname.includes('index.html')) {
-        startSliderWithLogoFade();
+// Start slider if hero exists
+    if (document.getElementById('hero')) {
+        startHeroIfPresent();
     }
+
 });
 
 
@@ -110,27 +111,74 @@ if (!('IntersectionObserver' in window)) {
 }
 
 
-// Hero slideshow
+// Hero slideshow (premium crossfade + Ken Burns)
 let currentSlide = 0;
+let sliderIntervalId = null;
+let sliderStarted = false;
 
-const heroImages = [
-    'images/IMG_9053.JPG',
-    'images/IMG_9071.JPG',
-    'images/IMG_9183.JPG',
-    'images/IMG_9234.JPG',
-    'images/IMG_E9022.JPG',
-    'images/GridArt_20250323_174730792.jpg'
-];
-
-function nextSlide() {
-    const hero = document.getElementById('hero');
-    if (!hero) return;
-
-    currentSlide = (currentSlide + 1) % heroImages.length;
-    hero.style.backgroundImage = `url('${heroImages[currentSlide]}')`;
+// Start once per page load
+function startHeroIfPresent() {
+    if (!document.getElementById('hero')) return;
+    // keep existing logo fade behavior
+    startSliderWithLogoFade();
 }
 
-let sliderStarted = false;
+
+function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function setActiveSlide(index) {
+    const track = document.getElementById('hero-slider-track');
+    if (!track) return;
+
+    const slides = track.querySelectorAll('.hero-slide');
+    if (!slides.length) return;
+
+    const safeIndex = ((index % slides.length) + slides.length) % slides.length;
+
+    slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === safeIndex);
+    });
+
+    const dots = document.querySelectorAll('[data-hero-dots] .hero-dot');
+    dots.forEach((dot, i) => {
+        dot.setAttribute('aria-current', i === safeIndex ? 'true' : 'false');
+    });
+}
+
+function nextSlide() {
+    currentSlide = currentSlide + 1;
+    setActiveSlide(currentSlide);
+}
+
+function prevSlide() {
+    currentSlide = currentSlide - 1;
+    setActiveSlide(currentSlide);
+}
+
+function buildDots() {
+    const track = document.getElementById('hero-slider-track');
+    const dotsWrap = document.querySelector('[data-hero-dots]');
+    if (!track || !dotsWrap) return;
+
+    const slides = track.querySelectorAll('.hero-slide');
+    dotsWrap.innerHTML = '';
+
+    slides.forEach((_, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'hero-dot';
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        btn.setAttribute('aria-current', i === currentSlide ? 'true' : 'false');
+        btn.addEventListener('click', () => {
+            currentSlide = i;
+            setActiveSlide(currentSlide);
+        });
+        dotsWrap.appendChild(btn);
+    });
+}
 
 function startSliderWithLogoFade() {
     if (sliderStarted) return;
@@ -141,8 +189,27 @@ function startSliderWithLogoFade() {
         if (logo) logo.classList.add('logo-fade-out');
     }, 500);
 
-    setInterval(nextSlide, 3000);
+    buildDots();
+    setActiveSlide(0);
+
+    const nextBtn = document.querySelector('[data-hero-next]');
+    const prevBtn = document.querySelector('[data-hero-prev]');
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); restartAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); restartAutoplay(); });
+
+    // Autoplay ~6s
+    if (!prefersReducedMotion()) {
+        sliderIntervalId = window.setInterval(nextSlide, 6000);
+    }
 }
+
+function restartAutoplay() {
+    if (prefersReducedMotion()) return;
+    if (sliderIntervalId) window.clearInterval(sliderIntervalId);
+    sliderIntervalId = window.setInterval(nextSlide, 6000);
+}
+
 
 
 // Amount buttons
