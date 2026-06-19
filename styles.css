@@ -1,3 +1,7 @@
+html, body {
+    display:none !important;
+}
+
 /* Logo fade-out animation for index.html */
 .hero-logo-large {
     max-width: 400px;
